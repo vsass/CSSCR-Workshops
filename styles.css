@@ -1,0 +1,11 @@
+/*-- scss:defaults --*/
+$presentation-heading-color: orange;
+
+/*-- scss:rules --*/
+.reveal .slide strong {
+  color: #F4A460;
+}
+.reveal .slide a {
+  color: #F4A460;
+}
+
