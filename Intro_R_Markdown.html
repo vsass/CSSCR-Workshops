@@ -399,7 +399,7 @@ Victoria Sass
 </div>
 </div>
 
-  <p class="date">2/4/23</p>
+  <p class="date">2/8/23</p>
 </section>
 <section>
 <section id="what-is-r-markdown" class="title-slide slide level1 smaller center">
@@ -417,7 +417,7 @@ Victoria Sass
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/workflow.png" style="width:50.0%"></p>
+<p><img data-src="/Users/victoriasass/Desktop/GitHub/CSSCR-Workshops/images/workflow.png" style="width:50.0%"></p>
 <p></p><figcaption>What happens when we render an .Rmd file?</figcaption><p></p>
 </figure>
 </div>
@@ -431,7 +431,7 @@ Victoria Sass
 <section class="slide level3">
 
 <ul>
-<li class="fragment">The <code>rmarkdown</code> package expanded what can be done with these types of documents, which now includes:
+<li class="fragment">The <code>rmarkdown</code> package expanded what can be done with <code>markdown</code> documents, which now includes:
 <ul>
 <li class="fragment">Compiling an R Markdown document into many different formats</li>
 <li class="fragment">Creating notebooks where you can directly run code chunks interactively</li>
@@ -479,21 +479,25 @@ If you want to create PDFs you’ll also need to download LaTeX. The easiest way
 <section>
 <section id="r-markdown-structure" class="title-slide slide level1 center">
 <h1>R Markdown Structure</h1>
-<ul>
-<li class="fragment">YAML metadata (aka document header)
+<p style="color:DodgerBlue;">
+YAML metadata (aka document header)
+</p>
 <ul>
 <li class="fragment">A note on customization</li>
-</ul></li>
-<li class="fragment">Document body and narrative elements
+</ul>
+<p style="color:DodgerBlue;">
+Document body and narrative elements
+</p>
 <ul>
 <li class="fragment">In-line code</li>
 <li class="fragment">Document structure</li>
 <li class="fragment">Formatting</li>
 <li class="fragment">External references</li>
 <li class="fragment">Math and equation syntax</li>
-</ul></li>
-<li class="fragment">Code chunks and chunk options</li>
 </ul>
+<p style="color:DodgerBlue;">
+Code chunks and chunk options
+</p>
 </section>
 <section id="yaml-metadata" class="title-slide slide level2 center">
 <h2>YAML metadata</h2>
@@ -526,7 +530,7 @@ If you want to create PDFs you’ll also need to download LaTeX. The easiest way
 <ul>
 <li class="fragment">Ready-made templates with the <a href="https://prettydoc.statr.me/"><code>prettydocs</code></a> package
 <ul>
-<li class="fragment">See more examples <a href="https://www.datadreaming.org/post/r-markdown-theme-gallery/">here</a></li>
+<li class="fragment">See more built-in themes and well as ones from other packages <a href="https://www.datadreaming.org/post/r-markdown-theme-gallery/">here</a></li>
 </ul></li>
 <li class="fragment">Applying journal-specific templates with <a href="https://pkgs.rstudio.com/rticles/index.html"><code>rticles</code></a></li>
 <li class="fragment">Using <a href="https://bookdown.org/yihui/rmarkdown-cookbook/html-output.html">HTML and CSS</a> for custom formatting</li>
@@ -774,13 +778,18 @@ Output
 <h3>Code chunk example</h3>
 <div class="fragment">
 <p>Here’s an example chunk with options</p>
-<p><code>```{r pressure, echo = FALSE, fig.height = 4, fig.width = 4, fig.cap = "Pressure plot"}</code></p>
+<p><code>```{r pressure, echo = FALSE, fig.dim = c(3,3), fig.cap = "Pressure plot"}</code></p>
 <p><code>plot(pressure)</code></p>
+<p><code>knitr::kable(summary(pressure), caption = "Table with Kable")</code></p>
 <p><code>```</code></p>
 </div>
 <div class="fragment">
 <p>And this is what the output looks like:</p>
-<div class="cell">
+</div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell" data-fig.dim="[4,4]">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -791,10 +800,89 @@ Output
 </div>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="cell-output-display">
+<table>
+<caption>Table with Kable</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">temperature</th>
+<th style="text-align: left;">pressure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Min. : 0</td>
+<td style="text-align: left;">Min. : 0.0002</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1st Qu.: 90</td>
+<td style="text-align: left;">1st Qu.: 0.1800</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Median :180</td>
+<td style="text-align: left;">Median : 8.8000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Mean :180</td>
+<td style="text-align: left;">Mean :124.3367</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3rd Qu.:270</td>
+<td style="text-align: left;">3rd Qu.:126.5000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Max. :360</td>
+<td style="text-align: left;">Max. :806.0000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section>
+<section id="cheatsheet" class="title-slide slide level1 center">
+<h1>Cheatsheet</h1>
+<p>Posit (formerly R Studio) provides cheatsheets for a number of packages, including R Markdown. You can downloaded the pdf here <a href="https://posit.co/wp-content/uploads/2022/10/rmarkdown-1.pdf">here</a></p>
+</section>
+<section id="section" class="title-slide slide level2 center" data-background-iframe="images/rmarkdown-1.pdf">
+<h2></h2>
+
+</section>
+</section>
+<section id="resources" class="title-slide slide level1 center">
+<h1>Resources</h1>
+<div class="fragment">
+<p>Basics and general reference guides:</p>
+</div>
+<ul>
+<li class="fragment"><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a></li>
+<li class="fragment"><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">R Markdown Cookbook</a></li>
+</ul>
+<div class="fragment">
+<p>Going even further:</p>
+</div>
+<ul>
+<li class="fragment">Including <a href="https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html">citations and bibliographies</a></li>
+<li class="fragment">Extending <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html">kable()</a> with <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#Overview">kableExtra package</a></li>
+<li class="fragment"><a href="https://posit.co/resources/videos/sharing-on-short-notice-how-to-get-your-materials-online-with-r-markdown/">Sharing on Short Notice: How to Get Your Materials Online With R Markdown</a></li>
+</ul>
 <div class="footer footer-default">
 
 </div>
-</section>
 </section>
     </div>
   </div>

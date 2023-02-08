@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R Markdown"
 author: "Victoria Sass"
-date: "Updated: 4 February 2023"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 format: 
   revealjs: 
     css: styles.css
@@ -38,7 +38,7 @@ knitr::include_graphics(here::here("images", "workflow.png"))
 
 ---
 
--   The `rmarkdown` package expanded what can be done with these types of documents, which now includes:
+-   The `rmarkdown` package expanded what can be done with `markdown` documents, which now includes:
     - Compiling an R Markdown document into many different formats
     - Creating notebooks where you can directly run code chunks interactively
     - Making slides for presentations (like this one!) in a range of formats (HTML5, LaTeX Beamer, or Powerpoint)
@@ -76,15 +76,19 @@ tinytex::install_tinytex()
 
 # R Markdown Structure
 
-- YAML metadata (aka document header)
-  - A note on customization
-- Document body and narrative elements
-  - In-line code
-  - Document structure
-  - Formatting
-  - External references
-  - Math and equation syntax
-- Code chunks and chunk options
+<p style="color:DodgerBlue;">YAML metadata (aka document header)</p>
+
+- A note on customization
+
+<p style="color:DodgerBlue;">Document body and narrative elements</p>
+
+- In-line code
+- Document structure
+- Formatting
+- External references
+- Math and equation syntax
+  
+<p style="color:DodgerBlue;">Code chunks and chunk options</p>
 
 ## YAML metadata 
 
@@ -122,7 +126,7 @@ For more information on ways to customize, see links below.
 :::
 
 - Ready-made templates with the [`prettydocs`](https://prettydoc.statr.me/) package
-  - See more examples [here](https://www.datadreaming.org/post/r-markdown-theme-gallery/)
+  - See more built-in themes and well as ones from other packages [here](https://www.datadreaming.org/post/r-markdown-theme-gallery/)
 - Applying journal-specific templates with [`rticles`](https://pkgs.rstudio.com/rticles/index.html) 
 - Using [HTML and CSS](https://bookdown.org/yihui/rmarkdown-cookbook/html-output.html) for custom formatting
 - Making tailored PDF files with [LaTeX](https://bookdown.org/yihui/rmarkdown-cookbook/latex-output.html)
@@ -396,29 +400,64 @@ Chunks have various options to control what happens with the code and output. So
 
 ### Code chunk example {.smaller}
 
-
 ::: fragment
 Here's an example chunk with options
 
-```` ```{r pressure, echo = FALSE, fig.height = 4, fig.width = 4, fig.cap = "Pressure plot"} ````
+```` ```{r pressure, echo = FALSE, fig.dim = c(3,3), fig.cap = "Pressure plot"} ````
 
 `plot(pressure)`
 
-```` ``` ````
+`knitr::kable(summary(pressure), caption = "Table with Kable")`
 
+
+```` ``` ````
 :::
 
 ::: fragment
-
 And this is what the output looks like:
+:::
 
-```{r pressure, echo = FALSE, fig.height = 4, fig.width = 4, fig.cap = "Pressure plot"}
+:::: {.columns}
+::: {.column width="50%"}
+
+:::fragment
+```{r pressure, echo = FALSE, fig.dim = c(4,4), fig.cap = "Pressure plot"}
 plot(pressure)
 ```
 :::
+:::
+::: {.column width="50%"}
+
+::: fragment
+```{r summary pressure, echo = FALSE}
+knitr::kable(summary(pressure), caption = "Table with Kable")
+
+```
+:::
+:::
+::::
+
+# Cheatsheet 
+
+Posit (formerly R Studio) provides cheatsheets for a number of packages, including R Markdown. You can downloaded the pdf here [here](https://posit.co/wp-content/uploads/2022/10/rmarkdown-1.pdf)
+
+## {background-iframe="images/rmarkdown-1.pdf"}
 
 
+# Resources
 
+::: fragment
+Basics and general reference guides:
+:::
+- [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+- [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
+
+::: fragment
+Going even further:
+:::
+- Including [citations and bibliographies](https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html)
+- Extending [kable()](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) with [kableExtra package](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#Overview)
+- [Sharing on Short Notice: How to Get Your Materials Online With R Markdown](https://posit.co/resources/videos/sharing-on-short-notice-how-to-get-your-materials-online-with-r-markdown/)
 
 
 
