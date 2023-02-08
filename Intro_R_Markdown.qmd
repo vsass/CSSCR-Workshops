@@ -1,0 +1,429 @@
+---
+title: "Introduction to R Markdown"
+author: "Victoria Sass"
+date: "Updated: 4 February 2023"
+format: 
+  revealjs: 
+    css: styles.css
+    theme: [night, styles.css]
+    highlight: tango
+    center: FALSE
+    controls: true
+    controls-layout: bottom-right
+    slide-level: 3
+    reveal_options:
+      slideNumber: "h/v"
+      previewLinks: true
+    reveal_plugins: ["notes"]
+incremental: true
+mouse-wheel: true
+history: false
+fontsize: "22pt"
+---
+
+# What is R Markdown? {.smaller}
+
+-   [Markdown](https://en.wikipedia.org/wiki/Markdown) is a purposefully simple language that allows users to write and format text with a plain-text editor.</small>
+-   [Pandoc](https://pandoc.org/) is a package created to convert Markdown documents to a wide range of outputs (e.g. Word, PDF, HTML, etc.).
+    -   It also significantly broadened the Markdown syntax to allow for inclusion of tables, footnotes, math expressions, citations, and more.
+-   The [`knitr`](https://yihui.org/knitr/) package first introduced the R Markdown document to make it easier embed R code directly into markdown documents.
+
+::: fragment
+```{r workflow, fig.align = 'center', out.width = "50%", fig.cap = "What happens when we render an .Rmd file?"}
+knitr::include_graphics(here::here("images", "workflow.png"))
+```
+:::
+
+-   You can read more about this process [here](https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-process.html).
+
+---
+
+-   The `rmarkdown` package expanded what can be done with these types of documents, which now includes:
+    - Compiling an R Markdown document into many different formats
+    - Creating notebooks where you can directly run code chunks interactively
+    - Making slides for presentations (like this one!) in a range of formats (HTML5, LaTeX Beamer, or Powerpoint)
+    - Producing dashboards with flexible, interactive, and attractive layouts
+    - Building interactive applications with Shiny
+    - Writing journal articles
+    - Authoring book chapters or entire books
+    - Generating websites and/or blogs
+
+# Installations
+
+<p class="fragment highlight-current-blue">First things first, you'll need to [install R](https://cran.r-project.org/) and [RStudio](https://posit.co/) (highly recommended).</p>
+
+<p class="fragment highlight-current-blue">If you are not using R Studio you'll need to install [Pandoc](http://pandoc.org) as well (R Studio users - this is already bundled in).</p>
+
+<p class="fragment highlight-current-blue">If you want to create PDFs you'll also need to download LaTeX. The easiest way to do this is installing [TinyTex](https://yihui.name/tinytex/).</p>
+
+:::fragment
+```{r, eval = FALSE, echo = TRUE}
+tinytex::install_tinytex()
+```
+:::
+
+## Creating a Markdown document
+
+1. Choose *File* > *New File* > *R Markdown....*
+2. Keep *Document* highlighted on the left-hand side, make sure *HTML Output* is selected, and click OK
+3. Save your file and name it `CSSCR_markdown_workshop.Rmd`
+4. Click the *Knit* icon (blue ball of yarn)
+5. See your freshly rendered HTML document appear in the preview window
+
+::: fragment
+<small>\*You may notice a new *Render* tab appear in the *Console* pane - this is `knitr` (and Pandoc) working behind the scenes to compile your final document.</small>
+:::
+
+# R Markdown Structure
+
+- YAML metadata (aka document header)
+  - A note on customization
+- Document body and narrative elements
+  - In-line code
+  - Document structure
+  - Formatting
+  - External references
+  - Math and equation syntax
+- Code chunks and chunk options
+
+## YAML metadata 
+
+YAML (YAML Ain't Markup Language) is the header of a markdown document and is everything contained between the first pair of three dashes. 
+
+::: fragment
+A basic example looks like this: 
+
+```yaml
+---
+title: "Untitled"
+author: "Victoria Sass"
+date: "2023-01-05"
+output: html_document 
+---
+```
+:::
+
+::: fragment
+You can customize many different features of your documents here. [Here are some examples for HTML](https://bookdown.org/yihui/rmarkdown/html-document.html).  
+:::
+
+### A Note on Customization
+
+- Part of the appeal of markdown is its simplicity and human readability. 
+- Adding more bells and whistles will expand the types of documents you can produce and their customizability but will also require learning new languages/systems/etc.
+
+
+::: fragment
+For day-to-day use, standard R Markdown works great and with some simple, basic tweaks you can make some nice looking documents. 
+:::
+
+::: fragment
+For more information on ways to customize, see links below. 
+:::
+
+- Ready-made templates with the [`prettydocs`](https://prettydoc.statr.me/) package
+  - See more examples [here](https://www.datadreaming.org/post/r-markdown-theme-gallery/)
+- Applying journal-specific templates with [`rticles`](https://pkgs.rstudio.com/rticles/index.html) 
+- Using [HTML and CSS](https://bookdown.org/yihui/rmarkdown-cookbook/html-output.html) for custom formatting
+- Making tailored PDF files with [LaTeX](https://bookdown.org/yihui/rmarkdown-cookbook/latex-output.html)
+
+
+## Document body and narrative elements
+
+- The narrative elements of a markdown document includes the written portion of your reports/articles/homework assignments.
+- An advantage of R Markdown documents is that these narrative elements can directly reference code, eliminating the need to copy and paste R output/results, thereby reducing potentials for error and making your work reproducible. 
+
+
+
+### In-line code
+
+::: fragment
+This so-called in-line code works by putting the code you want to evaluate within single backticks that begin with an `r` (i.e. `` `r ` ``)
+:::
+
+```{r, echo=FALSE}
+library(knitr)
+```
+
+
+::: fragment
+<p style="color:DodgerBlue;">For example, if you write the following in your markdown document:</p>
+
+Four score and seven years ago is the same as `` `r inline_expr("4*20 + 7", "md")` `` years ago.
+:::
+
+::: fragment
+<p style="color:DodgerBlue;">it will produce the following when knitted to your output document:</p>
+
+Four score and seven years ago is the same as `r 4*20 + 7` years ago.
+:::
+
+::: fragment
+Alternatively, say you have a saved value in an `r` object. 
+
+```{r, echo = TRUE, eval = TRUE}
+x <- sqrt(77)
+```
+:::
+
+::: fragment
+<p style="color:DodgerBlue;">You can directly reference this like so:</p>
+
+The value of `x` rounded to the nearest two decimals is`` `r inline_expr("round(x, 2)", "md")` ``.
+:::
+
+::: fragment
+<p style="color:DodgerBlue;">which will look like this:</p>
+
+The value of `x` rounded to the nearest two decimals is `r round(x, 2)`.
+:::
+
+### Document structure
+
+::: fragment
+Formatting the structure of your document is controlled within this narrative element as well. For example:
+:::
+
+:::: {.columns}
+
+::: {.column width="40%"}
+::: fragment
+<h4 style="color:dodgerblue;">Syntax</h4>
+
+```# Heading```
+
+<br>
+<br>
+
+```## Subheading```
+
+<br>
+
+```### Subsubheading```
+:::
+:::
+
+::: {.column width="60%"}
+
+:::fragment
+<h4 style="color:dodgerblue;">Output</h4>
+
+<h1>Heading</h1>
+<br>
+<h2>Subheading</h2>
+<br>
+<h3>Subsubheading</h3>
+:::
+:::
+::::
+
+### Formatting
+
+:::: {.columns}
+
+::: {.column width="40%"}
+::: fragment
+<h4 style="color:dodgerblue;">Syntax</h4>
+
+```**bold/strong emphasis**```
+
+```*italic/normal emphasis*```
+
+```> Block quote from famous person```
+
+<br>
+
+```markdown
+1. Ordered lists
+1. will even correct
+    1. your numbering
+    1. mistakes
+```
+
+<br>
+<br>
+<br>
+<br>
+
+```markdown
+* Unordered lists
+* are also pretty
+    + easy to do
+```
+
+:::
+:::
+::: {.column width="60%"}
+::: fragment
+<h4 style="color:dodgerblue;">Output</h4>
+
+**bold/strong emphasis**
+
+*italic/normal emphasis*
+
+> Block quote from famous person
+
+
+> 1. Ordered lists
+> 1. will even correct
+>     1. your numbering
+>     1. mistakes
+
+
+<br>
+
+> * Unordered lists
+> * are also pretty
+>     + easy to do
+
+:::
+:::
+::::
+
+### External references
+
+:::: {.columns}
+
+::: {.column width="50%"}
+::: fragment
+<h4 style="color:dodgerblue;">Syntax</h4>
+
+```[URL link](http://www.uw.edu)```
+
+```![Andy Dwyer gif](https://media0.giphy.com/media/mWCtOYKrk7rb0Z4EeO/giphy.gif)```
+
+:::
+:::
+::: {.column width="50%"}
+::: fragment
+<h4 style="color:dodgerblue;">Output</h4>
+
+[URL link](http://www.uw.edu)
+
+![Andy Dwyer gif](https://media0.giphy.com/media/mWCtOYKrk7rb0Z4EeO/giphy.gif)
+
+:::
+:::
+::::
+
+### Math and equation syntax
+
+:::: {.columns}
+::: {.column width="50%"}
+::: fragment
+<h4 style="color:dodgerblue;">Syntax</h4>
+
+```You can put some math $y= \left(\frac{2}{3} \right)^2$ directly in a sentence```
+
+
+```or centered within your document:```
+```$$\frac{1}{n} \sum_{i=1}^{n}
+x_i = \bar{x}_n$$```
+
+
+``Or a sentence with `code-looking font.` ``
+
+``Or a block of code:``
+
+```` ``` ````
+
+```y <- 1:5```
+
+```z <- y^2```
+
+```` ``` ````
+:::
+:::
+::: {.column width="50%"}
+::: fragment
+<h4 style="color:dodgerblue;">Output</h4>
+
+You can put some math $y= \left( \frac{2}{3} \right)^2$ directly in a sentence.
+
+or centered within your document:
+$$\frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x}_n$$
+
+Or a sentence with `code-looking font`.
+
+
+Or a block of code:
+
+
+```y <- 1:5``` 
+
+```z <- y^2```
+:::
+:::
+::::
+
+
+## Code chunks
+
+::: fragment 
+Sections of code within an R Markdown document are called code **chunks**. Code is sandwiched between two sets of three backticks and an `{r}`. For example, this code chunk: 
+
+
+```` ```{r} ````
+
+`summary(cars)`
+
+```` ``` ````
+:::
+
+::: fragment
+Will knit to this output in your final document: 
+
+```{r, echo = TRUE}
+summary(cars)
+```
+:::
+
+### Code chunk options {.smaller}
+
+Chunks have various options to control what happens with the code and output. Some basics include:
+
+:::fragment
+- `echo = FALSE`: Suppresses the actual R code itself from being shown in the document
+- `eval = FALSE`: Does not run the R code at all
+- `includes = FALSE`: Hides all output (code, messages, etc.) but still runs code. This is a good option for `setup` chunks where data, packages, and global settings are set.
+- `results = 'hide'`: Hides R's (non-plot) output from the document
+- `message = FALSE`: Hides messages generated by code from appearing in finished document.
+- `warning = FALSE`: Hides warning messages generated by code from appearing in finished document.
+- `cache = TRUE` = Saves results of that chunk so it does not have to rerun the code with each subsequent re-knit (helpful with chunks that are very time-intensive)
+- `fig.height = 5, fig.width = 5`: modify the dimensions of any plots generated by a chunk (units are in inches by default)
+- `fig.cap = "Figure caption"`: An optional caption provided to the figure produced within a chunk.
+:::
+
+::: fragment
+[There are tons of chunk options!](https://yihui.org/knitr/options/)
+:::
+
+### Code chunk example {.smaller}
+
+
+::: fragment
+Here's an example chunk with options
+
+```` ```{r pressure, echo = FALSE, fig.height = 4, fig.width = 4, fig.cap = "Pressure plot"} ````
+
+`plot(pressure)`
+
+```` ``` ````
+
+:::
+
+::: fragment
+
+And this is what the output looks like:
+
+```{r pressure, echo = FALSE, fig.height = 4, fig.width = 4, fig.cap = "Pressure plot"}
+plot(pressure)
+```
+:::
+
+
+
+
+
+
+
