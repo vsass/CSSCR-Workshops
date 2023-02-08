@@ -413,15 +413,11 @@ Victoria Sass
 <li class="fragment">The <a href="https://yihui.org/knitr/"><code>knitr</code></a> package first introduced the R Markdown document to make it easier embed R code directly into markdown documents.</li>
 </ul>
 <div class="fragment">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="/Users/victoriasass/Desktop/GitHub/CSSCR-Workshops/images/workflow.png" style="width:50.0%"></p>
+<p><img data-src="images/workflow.png" style="width:50.0%"></p>
 <p></p><figcaption>What happens when we render an .Rmd file?</figcaption><p></p>
 </figure>
-</div>
-</div>
 </div>
 </div>
 <ul>
@@ -777,14 +773,18 @@ Output
 <section id="code-chunk-example" class="slide level3 smaller">
 <h3>Code chunk example</h3>
 <div class="fragment">
-<p>Here’s an example chunk with options</p>
+<p style="color:DodgerBlue;">
+Here’s an example chunk with options
+</p>
 <p><code>```{r pressure, echo = FALSE, fig.dim = c(3,3), fig.cap = "Pressure plot"}</code></p>
 <p><code>plot(pressure)</code></p>
 <p><code>knitr::kable(summary(pressure), caption = "Table with Kable")</code></p>
 <p><code>```</code></p>
 </div>
 <div class="fragment">
-<p>And this is what the output looks like:</p>
+<p style="color:DodgerBlue;">
+And this is what the output looks like:
+</p>
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -878,6 +878,7 @@ Output
 <ul>
 <li class="fragment">Including <a href="https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html">citations and bibliographies</a></li>
 <li class="fragment">Extending <a href="https://bookdown.org/yihui/rmarkdown-cookbook/kable.html">kable()</a> with <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#Overview">kableExtra package</a></li>
+<li class="fragment">Advanced presentations with <a href="https://bookdown.org/yihui/rmarkdown/xaringan.html">xaringan</a> and <a href="https://bookdown.org/yihui/rmarkdown/revealjs.html">reveal.js</a></li>
 <li class="fragment"><a href="https://posit.co/resources/videos/sharing-on-short-notice-how-to-get-your-materials-online-with-r-markdown/">Sharing on Short Notice: How to Get Your Materials Online With R Markdown</a></li>
 </ul>
 <div class="footer footer-default">

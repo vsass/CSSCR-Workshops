@@ -29,11 +29,8 @@ fontsize: "22pt"
 -   The [`knitr`](https://yihui.org/knitr/) package first introduced the R Markdown document to make it easier embed R code directly into markdown documents.
 
 ::: fragment
-```{r workflow, fig.align = 'center', out.width = "50%", fig.cap = "What happens when we render an .Rmd file?"}
-knitr::include_graphics(here::here("images", "workflow.png"))
-```
+![What happens when we render an .Rmd file?](images/workflow.png){width=50%}
 :::
-
 -   You can read more about this process [here](https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-process.html).
 
 ---
@@ -401,7 +398,7 @@ Chunks have various options to control what happens with the code and output. So
 ### Code chunk example {.smaller}
 
 ::: fragment
-Here's an example chunk with options
+<p style="color:DodgerBlue;">Here's an example chunk with options</p>
 
 ```` ```{r pressure, echo = FALSE, fig.dim = c(3,3), fig.cap = "Pressure plot"} ````
 
@@ -414,7 +411,7 @@ Here's an example chunk with options
 :::
 
 ::: fragment
-And this is what the output looks like:
+<p style="color:DodgerBlue;">And this is what the output looks like:</p>
 :::
 
 :::: {.columns}
@@ -457,6 +454,7 @@ Going even further:
 :::
 - Including [citations and bibliographies](https://bookdown.org/yihui/rmarkdown-cookbook/bibliography.html)
 - Extending [kable()](https://bookdown.org/yihui/rmarkdown-cookbook/kable.html) with [kableExtra package](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html#Overview)
+- Advanced presentations with [xaringan](https://bookdown.org/yihui/rmarkdown/xaringan.html) and [reveal.js](https://bookdown.org/yihui/rmarkdown/revealjs.html)
 - [Sharing on Short Notice: How to Get Your Materials Online With R Markdown](https://posit.co/resources/videos/sharing-on-short-notice-how-to-get-your-materials-online-with-r-markdown/)
 
 
