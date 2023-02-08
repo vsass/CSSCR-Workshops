@@ -30,9 +30,9 @@ fontsize: "22pt"
 
 ::: fragment
 ![What happens when we render an .Rmd file?](images/workflow.png){width=50%}
-:::
 
 You can read more about this process [here](https://bookdown.org/yihui/rmarkdown-cookbook/rmarkdown-process.html).
+:::
 
 ---
 
